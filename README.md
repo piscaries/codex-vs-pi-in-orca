@@ -67,7 +67,7 @@ node eval/match/match.mjs apps/codex/engine/index.js apps/pi/engine/index.js 200
 REFEREE=B node eval/match/match.mjs apps/codex/engine/index.js apps/pi/engine/index.js 1000 > match-1s.json
 ```
 
-The logged results are in `results/`: 19–1 for Pi at 200 ms (`match-200ms.json`) and 16.5–3.5 at 1 s with Pi's rules as referee (`match-1000ms-refB.json`). Both engines search against the clock, so individual games vary from run to run.
+The logged results are in `results/`: at 200 ms Pi won 18 and drew 2, or 19–1 on points with a draw worth half (`match-200ms.json`); at 1 s with Pi's rules as referee, Pi won 13 and drew 7, or 16.5–3.5 (`match-1000ms-refB.json`). Both engines search against the clock, so individual games vary from run to run.
 
 To watch a logged game, serve the repository root and open the viewer, for example `python3 -m http.server 8002`, then http://localhost:8002/eval/match/viewer.html?file=../../results/match-200ms.json&game=0&ply=end (games are numbered from 0).
 
