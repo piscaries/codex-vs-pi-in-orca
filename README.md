@@ -2,6 +2,8 @@
 
 This repository holds everything behind the blog post [*I had Codex and Pi build the same app in Orca, then compared them side by side*](https://piscaries.github.io/posts/codex-and-pi-build-the-same-app-in-orca/): the team prompts, the task given to both agents, the exact messages they received, the two finished apps, and the tests and scripts used to compare them. You can check every number in the post, or rerun the comparison with your own agents.
 
+Discussion on [Hacker News](https://news.ycombinator.com/item?id=49979636).
+
 ## The experiment in one paragraph
 
 Two teams, each made of one coding agent playing three roles (product designer, engineering designer, builder), built the same product: a chess coach for beginners that plays against you and explains your mistakes. One team ran **Codex CLI with GPT-5.6 Sol**, the other **Pi with GLM-5.3**, the model Z.ai itself benchmarks against GPT-5.6 Sol. Both ran at high reasoning, with matched prompts, tools and context. One reviewer, **Claude Code with Claude Opus 4.6**, reviewed every spec, design and build phase on both teams, given only a track label (Codex's handoff notes did name its model family; see the Limits in the results). Two strong blind judges, **Claude Opus 5.5** and **GPT-6.1 Sol**, scored the specs, the designs and the finished apps side by side, on criteria split between general engineering practice and what a chess coach needs. Everything ran in [Orca](https://onorca.dev), each task in its own git worktree and terminal.
