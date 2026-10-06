@@ -1,0 +1,395 @@
+/* Chess Coach app styles (phase P4). Plain CSS, no build step. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #262421;
+  color: #ece8e2;
+  min-height: 100vh;
+}
+
+#app { max-width: 1080px; margin: 0 auto; padding: 16px; }
+
+#topbar {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 4px 4px 12px;
+}
+
+#topbar h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: #f0d9b5;
+}
+
+#last-move { font-size: 14px; color: #b9b3aa; }
+
+/* game-level controls (phase P5): new game + side choice, always reachable */
+#game-controls {
+  margin-left: auto;
+  align-self: center; /* the topbar aligns items by text baseline; this box is a nested flex row */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #b9b3aa;
+}
+
+#side-select {
+  background: #262421;
+  color: #ece8e2;
+  border: 1px solid #5a544d;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 14px;
+}
+
+#new-game-button {
+  background: #b58863;
+  color: #241f1c;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#new-game-button:hover { background: #c69b76; }
+
+#layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ---------------------------------------------------------------- board */
+
+#board-wrap { position: relative; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: min(560px, calc(100vw - 32px));
+  aspect-ratio: 1 / 1;
+  border: 4px solid #4a4540;
+  border-radius: 4px;
+  user-select: none;
+  position: relative;
+}
+
+.square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.square.light { background: #f0d9b5; }
+.square.dark { background: #b58863; }
+
+.square.last-move::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 246, 105, 0.45);
+  pointer-events: none;
+}
+
+.square.selected::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(130, 202, 255, 0.45);
+  pointer-events: none;
+}
+
+.square.check::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 60, 40, 0.85) 12%, rgba(255, 60, 40, 0.25) 65%, transparent 75%);
+  pointer-events: none;
+}
+
+.square.target::after {
+  content: "";
+  position: absolute;
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.28);
+  pointer-events: none;
+}
+
+.square.target-capture::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 4px solid rgba(20, 20, 20, 0.32);
+  background: transparent;
+  pointer-events: none;
+}
+
+.piece {
+  font-size: calc(min(560px, 100vw - 32px) / 8 * 0.72);
+  line-height: 1;
+  z-index: 1;
+}
+
+.piece.white {
+  color: #faf7f0;
+  text-shadow:
+    0 1px 0 #6b6259,
+    1px 0 0 #6b6259,
+    -1px 0 0 #6b6259,
+    0 -1px 0 #6b6259,
+    1px 1px 0 #6b6259,
+    -1px 1px 0 #6b6259,
+    1px -1px 0 #6b6259,
+    -1px -1px 0 #6b6259;
+}
+
+.piece.black {
+  color: #1e1b18;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* file/rank coordinates painted into the edge squares */
+.square[data-rank]::before {
+  content: attr(data-rank);
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+.square[data-file]::before {
+  content: attr(data-file);
+  position: absolute;
+  bottom: 1px;
+  right: 4px;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+/* ------------------------------------------------------ promotion picker */
+
+.promotion-picker {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.78);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 5;
+  border-radius: 2px;
+}
+
+.promotion-label { font-size: 16px; color: #f4efe8; }
+
+.promotion-row { display: flex; gap: 10px; }
+
+.promotion-option {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 2px solid #8a8178;
+  background: #f0d9b5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-option:hover { border-color: #ffd66e; background: #f7e6c4; }
+
+.promotion-option .piece { font-size: 44px; }
+
+.promotion-cancel {
+  border: none;
+  background: none;
+  color: #c9c2b8;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------- panel */
+
+.panel {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background: #302c29;
+  border: 1px solid #4a4540;
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status {
+  font-size: 17px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #3c3733;
+  color: #f0d9b5;
+}
+
+.status.check { color: #ff8a7a; }
+.status.over { color: #9dd39d; }
+
+.controls { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #b9b3aa; }
+
+#level-select {
+  background: #262421;
+  color: #ece8e2;
+  border: 1px solid #5a544d;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 14px;
+}
+
+.hint-area { display: flex; flex-direction: column; gap: 6px; }
+
+#hint-button {
+  align-self: flex-start;
+  background: #6f9e6f;
+  color: #10210f;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#hint-button:hover:enabled { background: #82b582; }
+#hint-button:disabled { opacity: 0.5; cursor: default; }
+
+.hint-text { font-size: 14px; color: #cfe6cf; min-height: 0; }
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.comments-empty { color: #8f877e; font-size: 13px; margin: 4px 0; }
+
+.comment {
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #3c3733;
+  border-left: 4px solid #8f877e;
+  font-size: 14px;
+}
+
+.comment-head { font-weight: 700; margin-bottom: 4px; }
+.comment-reason { margin: 3px 0; color: #ece8e2; line-height: 1.35; }
+.comment-better { margin-top: 5px; color: #cfe6cf; }
+
+.comment.verdict-best { border-left-color: #7fbf7f; }
+.comment.verdict-good { border-left-color: #9dd39d; }
+.comment.verdict-inaccuracy { border-left-color: #e6c86e; }
+.comment.verdict-mistake { border-left-color: #e69a4e; }
+.comment.verdict-blunder { border-left-color: #e05c45; }
+
+.over-banner { display: none; }
+.over-banner.visible {
+  display: block;
+  background: #243524;
+  border: 1px solid #6f9e6f;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.over-title { font-size: 18px; font-weight: 700; color: #9dd39d; }
+.over-reason { margin-top: 6px; font-size: 14px; color: #d8d3ca; line-height: 1.4; }
+
+/* ---------------------------------------------------- review panel (P5) */
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #262421;
+  border: 1px solid #4a4540;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.review[hidden] { display: none; }
+
+.review-title { margin: 0; font-size: 16px; font-weight: 700; color: #f0d9b5; }
+
+.review-result { font-size: 14px; color: #d8d3ca; }
+
+.review-body { display: flex; flex-direction: column; gap: 8px; }
+
+.review-clean { color: #9dd39d; font-size: 14px; margin: 2px 0; }
+
+.review-entry {
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #3c3733;
+  border-left: 4px solid #8f877e;
+  font-size: 14px;
+}
+
+.review-entry-head { font-weight: 700; margin-bottom: 4px; }
+.review-entry-reason { margin: 3px 0; color: #ece8e2; line-height: 1.35; }
+.review-entry-better { margin-top: 5px; color: #cfe6cf; }
+
+.review-entry.verdict-inaccuracy { border-left-color: #e6c86e; }
+.review-entry.verdict-mistake { border-left-color: #e69a4e; }
+.review-entry.verdict-blunder { border-left-color: #e05c45; }
+
+.review-copy { display: flex; align-items: center; gap: 10px; }
+
+#copy-button {
+  align-self: flex-start;
+  background: #6f9e6f;
+  color: #10210f;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#copy-button:hover { background: #82b582; }
+
+.review-copy-feedback { font-size: 13px; color: #cfe6cf; }
+
+.review-transcript {
+  width: 100%;
+  min-height: 110px;
+  background: #1e1b18;
+  color: #ece8e2;
+  border: 1px solid #5a544d;
+  border-radius: 6px;
+  padding: 8px;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  resize: vertical;
+}

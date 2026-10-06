@@ -1,0 +1,34 @@
+# Independent blind scoring: engineering designs A and B (run 5 rescore)
+
+Scored independently against the shared rubric, each against its own spec (embedded in its packet). Method note: all codebase claims were re-verified on this machine — Node v26.0.0, Chrome 154.0.8037.93, `chess-coach/` absent, no root `package.json` (so `.js` defaults to CommonJS), repo `tests/` are Python — both packets' grounding facts are correct. B's pinned perft counts (start d4=197281, Kiwipete d3=97862) match published tables.
+
+## 1. Score table
+
+| Rubric line (max) | A | B |
+|---|---|---|
+| Traceability to the spec (20) | **19** — all FR-001…011 and SC-001…005 mapped, e.g. "FR-002, FR-011; SC-001 \| P0,P2 \| perft/special/status tests and exact public API tests plus owner suite"; −1 because some proofs name no artifact ("FR-001 … profile comparison/demo"). | **19** — all FR-001…010 and SC-001…006 mapped to named checks ("FR-003 \| P2 \| scripts/levels-check.js (SC-003)"); −1 because the SC block is compressed into one row ("SC-002/3/4/5/6 \| P2/P3/P5 \| as rows above") instead of per-SC mappings. |
+| Soundness of architecture and contracts (20) | **18** — precise typed-error taxonomy ("…throws TypeError; illegal applyMove/reviewMove throws Error; terminal bestMove throws RangeError"), worker protocol with "Results are revalidated before application; stale IDs are ignored", honest repetition split ("FEN-only gameStatus cannot infer history"); −2: insufficient-material "standard cases" unspecified; Worker requires its own server.mjs seam. | **18** — elegant dual-use contract: "createSearch(pos, budgetMs) whose step() … bestMove() drains it synchronously (Node/tests), game.js drains it across setTimeout chunks", correctly noting "workers fail on file://"; exact cp verdict thresholds and gameStatus precedence; −2: cooperative chunking isolates the main thread less robustly than a Worker (only an escalation trigger guards chunk length). |
+| Phase ownership, dependencies, safe parallelism (20) | **19** — five phases, strictly disjoint owned files (verified pairwise), `engine/index.js` assembled exactly once in P2 after its suppliers exist; "Rollback is a revert of that phase commit; P0 rollback invalidates all later phases"; −1: sequential-only, though justified by the one-builder envelope. | **16** — real contradiction: P1 owns `engine/index.js` ("facade legalMoves/applyMove/perft/gameStatus") yet P2's outcome is "facade bestMove" and P3's "facade reviewMove" without listing `engine/index.js` in their owned files — those phases can't deliver their outcomes inside their ownership; also "review thresholds … freeze at end of P2" though `review.js` is created in P3; P5 re-edits P4 files (declared and sequenced, minor). |
+| Checks that actually prove behavior + quality-bar verification (20) | **18** — non-circular truthfulness proof ("10 coaching lines replay and prove reason/fix"), honest-review identity test, Chrome smoke "drives the real page over localhost and asserts responsive busy/turn/result states", audit incl. keyboard/200% zoom; −2: perft "through depth 3" is a shallow gate with no pinned counts, and "profiles differ" has no metric. | **18** — most quantified checks: "perft: start d4=197281, Kiwipete d3=97862" (counts correct), "bestMove legal and ≤ timeMs+50 ms over 50 FENs", "weak proxy wins ≥6/10 at level 1, ≤1/10 at level 4" (seeded), "≥20 blunder probes"; −2: truthfulness gate partly circular ("hanging-piece claims machine-verified (detector re-check)" — the same detector re-verifies itself) and bare ui-smoke only asserts "board DOM present, zero console errors". |
+| Grounding in the real codebase, risks, effort realism (20) | **18** — every fact verified correct ("chess-coach/ and root package.json are absent (find/test, 2026-10-04)"), risks with stop conditions ("stop on any standard perft mismatch"), 22–30h total; −2: P0 (full rules engine + perft + clocks + invalid inputs) in 6–8h is the most aggressive estimate in either packet. | **18** — facts verified and methodologically strongest ("verified with a scratch ES-module project"), concrete escalation triggers ("escalate any phase overrun beyond half again", "never weaken the check"), 5.5d splits the rules core across P0+P1 (1.5d) — more realistic than A's single-phase rules estimate; −2: P4 (full UI + tests + smoke script) in 1.5d is tight. |
+
+## 2. Totals
+
+| Packet | Traceability | Architecture | Phase ownership | Checks | Grounding | **Total** |
+|---|---|---|---|---|---|---|
+| **A** | 19 | 18 | 19 | 18 | 18 | **92 / 100** |
+| **B** | 19 | 18 | 16 | 18 | 18 | **89 / 100** |
+
+**A is stronger overall.** The margin comes almost entirely from phase-plan coherence: both packets are well-grounded and well-traced, but B's build table contains an internal ownership contradiction on the one file every later phase must touch.
+
+## 3. Per rubric line, which is better
+
+- **Traceability — tie (19/19).** Both map every FR and SC to a phase and a check; A's proofs are occasionally nameless, B's SC rows are lumped.
+- **Architecture and contracts — tie (18/18).** A wins on contract breadth (typed errors, state records, revalidated worker protocol); B wins on fit (steppable search serving the hidden suite and a never-freezing UI from one primitive, honest about `file://`).
+- **Phase ownership and safe parallelism — A (19 vs 16).** A's owned-file sets are exactly disjoint and the facade is assembled once; B's P2/P3 must edit `engine/index.js` that P1 owns, and "freeze at end of P2" names a contract (`review` thresholds) that doesn't exist until P3.
+- **Checks and quality-bar verification — tie (18/18).** B's checks are more quantified (pinned perft counts, ms bounds, seeded win-rate thresholds); A's are more independent (replay-proven coaching claims vs B's self-re-verifying detectors) and broader (accessibility/zoom).
+- **Grounding, risks, effort — tie (18/18).** Both verified the same facts correctly; B's scratch-project verification and rules-core time split are slightly more rigorous, A's risk handling is equally disciplined.
+
+## 4. If I had to build from one packet
+
+I would build from **A**: its phase plan is the only one a builder can execute exactly as written, since every owned-file set is disjoint and the public facade is assembled once, and its non-circular replay-based proof of coaching truthfulness targets the hardest quality bar. Building from A, I would import three B strengths with reasons: B's pinned perft counts and deeper depth gate (start d4=197281, Kiwipete d3=97862) as a harder legality gate; B's seeded statistical level check ("≥6/10 vs ≤1/10") with explicit level parameters (depth cap, blunder chance, candidate pool) to make "profiles differ" falsifiable; and B's `file://`-compatible steppable-search idea as a fallback if the worker/server path proves brittle.

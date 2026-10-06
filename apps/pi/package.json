@@ -1,0 +1,7 @@
+{
+  "name": "chess-coach",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local chess coach: chess rules engine and browser app. No dependencies, no build step."
+}

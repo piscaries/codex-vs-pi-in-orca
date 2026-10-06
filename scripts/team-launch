@@ -1,0 +1,16 @@
+#!/bin/zsh
+# Launcher: start an agent CLI in an Orca terminal with NO role prompt bound.
+# The team charter and role file are sent at the top of the task message instead, so both
+# harnesses receive the role in the same place. Reasoning is set to high on both.
+# CODEX_HOME_CLEAN is a fresh Codex config directory (see REPRODUCE.md), so no personal AGENTS.md, skills or MCP servers load.
+# usage: scripts/team-launch <harness> <worktree-id> [title]   -> prints the Orca terminal handle
+set -euo pipefail
+harness=$1 wt=$2 title=${3:-"$harness"}
+case $harness in
+  codex)  cmd="env CODEX_HOME=${CODEX_HOME_CLEAN:-$HOME/.codex-clean} codex --model ${CODEX_MODEL:-gpt-5.6-sol} -c model_reasoning_effort=high" ;;
+  pi)     cmd="pi --model zai-coding-cn/glm-5.3 --thinking high --no-skills" ;;
+  claude) cmd="claude --model ${CLAUDE_MODEL:-claude-opus-4-6}" ;;
+  *) print -u2 "unknown harness: $harness"; exit 2 ;;
+esac
+orca terminal create --worktree "id:$wt" --title "$title" --command "$cmd" --json \
+  | python3 -c "import json,sys;print(json.load(sys.stdin)['result']['terminal']['handle'])"

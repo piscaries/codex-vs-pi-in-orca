@@ -1,0 +1,27 @@
+# Roster: two independent tracks build the whole product; a third vendor reviews both.
+# Every agent gets the team charter and its role file at the top of its task message (scripts/team-launch),
+# so the role arrives in the same place for every harness. Reasoning effort is high for both authors.
+
+[track.codex]
+harness = "codex"     # Codex CLI, clean CODEX_HOME (~/.codex-run5): no global AGENTS.md, personal skills, memories or MCP servers; bundled system skills, task-continuity plugin and Orca status hooks still load
+model = "gpt-5.6-sol"   # the earlier run used gpt-5.5 (runs/gpt-5.5/)
+reasoning = "high"
+roles = ["product-designer", "engineering-designer", "builder"]
+
+[track.pi]
+harness = "pi"        # Pi CLI, --thinking high --no-skills; Orca status extensions only
+model = "zai-coding-cn/glm-5.3"
+reasoning = "high"
+roles = ["product-designer", "engineering-designer", "builder"]
+
+[reviewer]               # reviews both tracks: spec, design, every code phase, acceptance
+harness = "claude"
+model = "claude-opus-4-6"
+roles = ["spec-reviewer", "engineering-reviewer", "code-reviewer", "acceptance-reviewer"]
+
+[judges]                 # blind, scoring only, fresh sessions, never the reviewer
+members = [
+  { harness = "claude", model = "claude-opus-5-5" },
+  { harness = "codex",  model = "gpt-6.1-sol" },
+  { harness = "claude", model = "claude-sonnet-5-5" },   # weaker comparison judge
+]                        # rubrics: eval/judging/rubrics.md; they score specs, designs and the finished apps

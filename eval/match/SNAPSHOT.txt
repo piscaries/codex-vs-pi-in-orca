@@ -1,0 +1,4 @@
+Engines as played in the logged matches (results/):
+Codex (t3, gpt-5.6-sol): run5-t3 c693de1, identical to apps/codex
+Pi (t2, glm-5.3): run5-t2 9a0530c, identical to apps/pi
+Earlier run (runs/gpt-5.5/results/): t1 59b636f, t2 d4852e4 (Pi's bestMove is unchanged between d4852e4 and 9a0530c)

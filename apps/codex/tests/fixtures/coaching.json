@@ -1,0 +1,218 @@
+{
+  "reviewOptions": {
+    "timeMs": 250,
+    "maxDepth": 3
+  },
+  "cases": [
+    {
+      "id": "queen-pawn-white",
+      "kind": "severe",
+      "fen": "7k/8/8/3p4/8/4Q3/8/K7 w - - 0 1",
+      "played": "e3e4",
+      "response": "d5e4",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your queen on e4 with their pawn from d5.",
+      "expectedBetterMove": "a1a2",
+      "expectedDisplay": "Your opponent can capture your queen on e4 with their pawn from d5. Try move from a1 to a2."
+    },
+    {
+      "id": "rook-pawn-white",
+      "kind": "severe",
+      "fen": "7k/8/8/3p4/8/4R3/8/K7 w - - 0 1",
+      "played": "e3e4",
+      "response": "d5e4",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your rook on e4 with their pawn from d5.",
+      "expectedBetterMove": "e3d3",
+      "expectedDisplay": "Your opponent can capture your rook on e4 with their pawn from d5. Try move from e3 to d3."
+    },
+    {
+      "id": "bishop-pawn-white",
+      "kind": "severe",
+      "fen": "7k/8/8/3p4/8/5B2/8/K7 w - - 0 1",
+      "played": "f3e4",
+      "response": "d5e4",
+      "expectedVerdict": "mistake",
+      "expectedReason": "Your opponent can capture your bishop on e4 with their pawn from d5.",
+      "expectedBetterMove": "a1a2",
+      "expectedDisplay": "Your opponent can capture your bishop on e4 with their pawn from d5. Try move from a1 to a2."
+    },
+    {
+      "id": "knight-pawn-white",
+      "kind": "severe",
+      "fen": "7k/8/8/3p4/8/8/5N2/K7 w - - 0 1",
+      "played": "f2e4",
+      "response": "d5e4",
+      "expectedVerdict": "mistake",
+      "expectedReason": "Your opponent can capture your knight on e4 with their pawn from d5.",
+      "expectedBetterMove": "a1a2",
+      "expectedDisplay": "Your opponent can capture your knight on e4 with their pawn from d5. Try move from a1 to a2."
+    },
+    {
+      "id": "queen-pawn-black",
+      "kind": "severe",
+      "fen": "k7/8/4q3/8/3P4/8/8/7K b - - 0 1",
+      "played": "e6e5",
+      "response": "d4e5",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your queen on e5 with their pawn from d4.",
+      "expectedBetterMove": "a8a7",
+      "expectedDisplay": "Your opponent can capture your queen on e5 with their pawn from d4. Try move from a8 to a7."
+    },
+    {
+      "id": "rook-pawn-black",
+      "kind": "severe",
+      "fen": "k7/8/4r3/8/3P4/8/8/7K b - - 0 1",
+      "played": "e6e5",
+      "response": "d4e5",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your rook on e5 with their pawn from d4.",
+      "expectedBetterMove": "e6d6",
+      "expectedDisplay": "Your opponent can capture your rook on e5 with their pawn from d4. Try move from e6 to d6."
+    },
+    {
+      "id": "bishop-pawn-black",
+      "kind": "severe",
+      "fen": "k7/8/5b2/8/3P4/8/8/7K b - - 0 1",
+      "played": "f6e5",
+      "response": "d4e5",
+      "expectedVerdict": "mistake",
+      "expectedReason": "Your opponent can capture your bishop on e5 with their pawn from d4.",
+      "expectedBetterMove": "a8a7",
+      "expectedDisplay": "Your opponent can capture your bishop on e5 with their pawn from d4. Try move from a8 to a7."
+    },
+    {
+      "id": "knight-pawn-black",
+      "kind": "severe",
+      "fen": "k7/5n2/8/8/3P4/8/8/7K b - - 0 1",
+      "played": "f7e5",
+      "response": "d4e5",
+      "expectedVerdict": "mistake",
+      "expectedReason": "Your opponent can capture your knight on e5 with their pawn from d4.",
+      "expectedBetterMove": "a8a7",
+      "expectedDisplay": "Your opponent can capture your knight on e5 with their pawn from d4. Try move from a8 to a7."
+    },
+    {
+      "id": "queen-rook-file",
+      "kind": "severe",
+      "fen": "3r3k/8/8/8/4Q3/8/8/K7 w - - 0 1",
+      "played": "e4d4",
+      "response": "d8d4",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your queen on d4 with their rook from d8.",
+      "expectedBetterMove": "e4e5",
+      "expectedDisplay": "Your opponent can capture your queen on d4 with their rook from d8. Try move from e4 to e5."
+    },
+    {
+      "id": "queen-bishop-diagonal",
+      "kind": "severe",
+      "fen": "7k/6b1/8/8/4Q3/8/8/K7 w - - 0 1",
+      "played": "e4d4",
+      "response": "g7d4",
+      "expectedVerdict": "blunder",
+      "expectedReason": "Your opponent can capture your queen on d4 with their bishop from g7.",
+      "expectedBetterMove": "a1a2",
+      "expectedDisplay": "Your opponent can capture your queen on d4 with their bishop from g7. Try move from a1 to a2."
+    },
+    {
+      "id": "take-hanging-rook",
+      "kind": "ordinary",
+      "fen": "7k/8/8/8/3r4/4Q3/8/K7 w - - 0 1",
+      "played": "e3d4",
+      "expectedVerdict": "best",
+      "expectedReason": "That was the strongest move.",
+      "expectedBetterMove": null,
+      "expectedDisplay": "That was the strongest move."
+    },
+    {
+      "id": "take-hanging-pawn",
+      "kind": "ordinary",
+      "fen": "7k/8/8/3p4/8/4Q3/8/K7 w - - 0 1",
+      "played": "e3d4",
+      "expectedVerdict": "best",
+      "expectedReason": "That was the strongest move.",
+      "expectedBetterMove": null,
+      "expectedDisplay": "That was the strongest move."
+    },
+    {
+      "id": "save-rook",
+      "kind": "ordinary",
+      "fen": "7k/8/8/3p4/8/4R3/8/K7 w - - 0 1",
+      "played": "e3d3",
+      "expectedVerdict": "best",
+      "expectedReason": "That was the strongest move.",
+      "expectedBetterMove": null,
+      "expectedDisplay": "That was the strongest move."
+    },
+    {
+      "id": "trade-rook",
+      "kind": "ordinary",
+      "fen": "4r1k1/8/8/8/8/8/4R3/4K3 w - - 0 1",
+      "played": "e2e8",
+      "expectedVerdict": "best",
+      "expectedReason": "That was the strongest move.",
+      "expectedBetterMove": null,
+      "expectedDisplay": "That was the strongest move."
+    },
+    {
+      "id": "promote-queen",
+      "kind": "ordinary",
+      "fen": "4k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "played": "a7a8q",
+      "expectedVerdict": "best",
+      "expectedReason": "That was the strongest move.",
+      "expectedBetterMove": null,
+      "expectedDisplay": "That was the strongest move."
+    },
+    {
+      "id": "queen-edge-inaccuracy",
+      "kind": "ordinary",
+      "fen": "7k/8/8/8/3r4/4Q3/8/K7 w - - 0 1",
+      "played": "e3h6",
+      "expectedVerdict": "inaccuracy",
+      "expectedReason": "A stronger move was available.",
+      "expectedBetterMove": "e3c3",
+      "expectedDisplay": "A stronger move was available. Try move from e3 to c3."
+    },
+    {
+      "id": "queen-corner-inaccuracy",
+      "kind": "ordinary",
+      "fen": "7k/8/8/3p4/8/4Q3/8/K7 w - - 0 1",
+      "played": "e3c1",
+      "expectedVerdict": "inaccuracy",
+      "expectedReason": "A stronger move was available.",
+      "expectedBetterMove": "a1a2",
+      "expectedDisplay": "A stronger move was available. Try move from a1 to a2."
+    },
+    {
+      "id": "rook-forward-inaccuracy",
+      "kind": "ordinary",
+      "fen": "7k/8/8/3p4/8/4R3/8/K7 w - - 0 1",
+      "played": "e3e5",
+      "expectedVerdict": "inaccuracy",
+      "expectedReason": "A stronger move was available.",
+      "expectedBetterMove": "e3d3",
+      "expectedDisplay": "A stronger move was available. Try move from e3 to d3."
+    },
+    {
+      "id": "underpromote-rook",
+      "kind": "ordinary",
+      "fen": "4k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "played": "a7a8r",
+      "expectedVerdict": "inaccuracy",
+      "expectedReason": "A stronger move was available.",
+      "expectedBetterMove": "a7a8q",
+      "expectedDisplay": "A stronger move was available. Try move from a7 to a8 and promote to a queen."
+    },
+    {
+      "id": "underpromote-knight",
+      "kind": "ordinary",
+      "fen": "4k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "played": "a7a8n",
+      "expectedVerdict": "inaccuracy",
+      "expectedReason": "A stronger move was available.",
+      "expectedBetterMove": "a7a8q",
+      "expectedDisplay": "A stronger move was available. Try move from a7 to a8 and promote to a queen."
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 940" width="1400" height="940" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b5b66"/>
+    </marker>
+    <marker id="arrowJ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b8741a"/>
+    </marker>
+    <style>
+      .box { stroke-width: 1.6; rx: 10; }
+      .t { font-size: 17px; fill: #1d1d22; }
+      .tb { font-size: 17px; font-weight: 650; fill: #1d1d22; }
+      .s { font-size: 13.5px; fill: #4a4a55; }
+      .hdr { font-size: 19px; font-weight: 700; fill: #ffffff; }
+      .lyr { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; fill: #8a8a96; }
+      .flow { stroke: #5b5b66; stroke-width: 1.6; fill: none; }
+      .rev { stroke: #7a52b3; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+      .judge { stroke: #b8741a; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="940" fill="#ffffff"/>
+
+  <!-- Layer 1 judging, above Orca -->
+  <text x="40" y="34" class="lyr">LAYER 1 · HOW THEY BUILT IT</text>
+  <rect x="420" y="18" width="560" height="74" class="box" fill="#fdf3e4" stroke="#b8741a"/>
+  <text x="700" y="47" text-anchor="middle" class="tb">Three blind judges</text>
+  <text x="700" y="71" text-anchor="middle" class="s">Claude Sonnet 5.5 · GPT-5.6-Sol · GLM-5.3 — score spec A vs B, then design A vs B</text>
+
+  <!-- Orca frame -->
+  <rect x="44" y="118" width="1312" height="548" rx="16" fill="#f7f7f9" stroke="#c9c9d2" stroke-width="1.5"/>
+  <text x="64" y="146" class="lyr">ORCA · EVERY TASK IN ITS OWN WORKTREE AND TERMINAL</text>
+
+  <!-- Team headers -->
+  <rect x="60" y="164" width="400" height="48" class="box" fill="#2f6fd0" stroke="#2f6fd0"/>
+  <text x="260" y="194" text-anchor="middle" class="hdr">Codex team · GPT-5.5</text>
+  <rect x="940" y="164" width="400" height="48" class="box" fill="#2e9a62" stroke="#2e9a62"/>
+  <text x="1140" y="194" text-anchor="middle" class="hdr">Pi team · GLM-5.3</text>
+
+  <!-- Coordinator -->
+  <rect x="560" y="164" width="280" height="48" class="box" fill="#ffffff" stroke="#8a8a96"/>
+  <text x="700" y="186" text-anchor="middle" class="tb">Coordinator (me)</text>
+  <text x="700" y="204" text-anchor="middle" class="s">dispatches tasks · answers questions</text>
+
+  <!-- Codex steps -->
+  <g>
+    <rect x="60" y="240" width="400" height="66" class="box" fill="#eaf1fc" stroke="#2f6fd0"/>
+    <text x="80" y="268" class="tb">Product designer</text><text x="80" y="292" class="s">writes the spec</text>
+    <rect x="60" y="340" width="400" height="66" class="box" fill="#eaf1fc" stroke="#2f6fd0"/>
+    <text x="80" y="368" class="tb">Engineering designer</text><text x="80" y="392" class="s">writes the design and build plan</text>
+    <rect x="60" y="440" width="400" height="66" class="box" fill="#eaf1fc" stroke="#2f6fd0"/>
+    <text x="80" y="468" class="tb">Builder</text><text x="80" y="492" class="s">builds one phase at a time · 4 phases</text>
+    <rect x="60" y="560" width="400" height="80" class="box" fill="#ffffff" stroke="#2f6fd0" stroke-width="2.2"/>
+    <text x="260" y="594" text-anchor="middle" class="tb">Chess coach app (Codex)</text>
+    <text x="260" y="618" text-anchor="middle" class="s">on the Codex team's own branch</text>
+    <line x1="260" y1="306" x2="260" y2="338" class="flow" marker-end="url(#arrow)"/>
+    <line x1="260" y1="406" x2="260" y2="438" class="flow" marker-end="url(#arrow)"/>
+    <line x1="260" y1="506" x2="260" y2="558" class="flow" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Pi steps -->
+  <g>
+    <rect x="940" y="240" width="400" height="66" class="box" fill="#e8f6ee" stroke="#2e9a62"/>
+    <text x="960" y="268" class="tb">Product designer</text><text x="960" y="292" class="s">writes the spec</text>
+    <rect x="940" y="340" width="400" height="66" class="box" fill="#e8f6ee" stroke="#2e9a62"/>
+    <text x="960" y="368" class="tb">Engineering designer</text><text x="960" y="392" class="s">writes the design and build plan</text>
+    <rect x="940" y="440" width="400" height="66" class="box" fill="#e8f6ee" stroke="#2e9a62"/>
+    <text x="960" y="468" class="tb">Builder</text><text x="960" y="492" class="s">builds one phase at a time · 6 phases</text>
+    <rect x="940" y="560" width="400" height="80" class="box" fill="#ffffff" stroke="#2e9a62" stroke-width="2.2"/>
+    <text x="1140" y="594" text-anchor="middle" class="tb">Chess coach app (Pi)</text>
+    <text x="1140" y="618" text-anchor="middle" class="s">on the Pi team's own branch</text>
+    <line x1="1140" y1="306" x2="1140" y2="338" class="flow" marker-end="url(#arrow)"/>
+    <line x1="1140" y1="406" x2="1140" y2="438" class="flow" marker-end="url(#arrow)"/>
+    <line x1="1140" y1="506" x2="1140" y2="558" class="flow" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Reviewer -->
+  <rect x="580" y="240" width="240" height="266" class="box" fill="#f3eefa" stroke="#7a52b3"/>
+  <text x="700" y="276" text-anchor="middle" class="tb">Reviewer</text>
+  <text x="700" y="298" text-anchor="middle" class="s">Claude Code · Opus 4.6</text>
+  <text x="700" y="336" text-anchor="middle" class="s">reviews every spec,</text>
+  <text x="700" y="356" text-anchor="middle" class="s">design and phase</text>
+  <text x="700" y="392" text-anchor="middle" class="s">sees the teams only</text>
+  <text x="700" y="412" text-anchor="middle" class="s">as t1 and t2</text>
+  <text x="700" y="450" text-anchor="middle" class="s">PASS → merge</text>
+  <text x="700" y="470" text-anchor="middle" class="s">REWORK → back to author</text>
+  <!-- review links -->
+  <line x1="462" y1="273" x2="578" y2="273" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="462" y1="373" x2="578" y2="373" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="462" y1="473" x2="578" y2="473" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="822" y1="273" x2="938" y2="273" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="822" y1="373" x2="938" y2="373" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="822" y1="473" x2="938" y2="473" class="rev" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+  <!-- To judges: spec and design from both teams (dashed, orange), routed outside the frame edges -->
+  <path d="M60,262 H26 V60 H418" class="judge" marker-end="url(#arrowJ)"/>
+  <path d="M60,362 H34 V76 H418" class="judge" marker-end="url(#arrowJ)"/>
+  <path d="M1340,262 H1374 V60 H982" class="judge" marker-end="url(#arrowJ)"/>
+  <path d="M1340,362 H1366 V76 H982" class="judge" marker-end="url(#arrowJ)"/>
+
+  <!-- Layer 2 -->
+  <text x="40" y="740" class="lyr">LAYER 2 · WHAT THEY BUILT</text>
+  <rect x="60" y="760" width="400" height="80" class="box" fill="#fdf3e4" stroke="#b8741a"/>
+  <text x="260" y="793" text-anchor="middle" class="tb">43 hidden tests</text>
+  <text x="260" y="817" text-anchor="middle" class="s">written before the run · no agent saw them</text>
+  <rect x="500" y="760" width="400" height="80" class="box" fill="#fdf3e4" stroke="#b8741a"/>
+  <text x="700" y="793" text-anchor="middle" class="tb">Coaching + engine match</text>
+  <text x="700" y="817" text-anchor="middle" class="s">same positions · 20 games, each side plays White once</text>
+  <rect x="940" y="760" width="400" height="80" class="box" fill="#fdf3e4" stroke="#b8741a"/>
+  <text x="1140" y="793" text-anchor="middle" class="tb">Acceptance review</text>
+  <text x="1140" y="817" text-anchor="middle" class="s">Claude Code plays full games as a beginner</text>
+  <!-- app to layer 2: both apps feed one bar, the bar feeds all three checks -->
+  <path d="M260,640 V712" class="judge"/>
+  <path d="M1140,640 V712" class="judge"/>
+  <path d="M260,712 H1140" class="judge"/>
+  <text x="700" y="704" text-anchor="middle" class="s">both apps</text>
+  <path d="M260,712 V758" class="judge" marker-end="url(#arrowJ)"/>
+  <path d="M700,712 V758" class="judge" marker-end="url(#arrowJ)"/>
+  <path d="M1140,712 V758" class="judge" marker-end="url(#arrowJ)"/>
+
+  <!-- Legend -->
+  <g transform="translate(60,880)">
+    <line x1="0" y1="10" x2="40" y2="10" class="flow" marker-end="url(#arrow)"/>
+    <text x="50" y="15" class="s">work flows to the next role</text>
+    <line x1="260" y1="10" x2="300" y2="10" class="rev"/>
+    <text x="310" y="15" class="s">review: PASS or REWORK</text>
+    <line x1="510" y1="10" x2="550" y2="10" class="judge"/>
+    <text x="560" y="15" class="s">compared, outside both teams</text>
+  </g>
+</svg>

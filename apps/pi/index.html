@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chess Coach</title>
+<link rel="stylesheet" href="./app/app.css">
+</head>
+<body>
+<script>
+// Smoke-test error collector (scripts/ui-smoke.sh asserts on this after
+// load). It must run before any module so module-load failures are caught.
+(function () {
+  var errors = [];
+  window.__coachErrors = errors;
+  window.addEventListener('error', function (e) {
+    errors.push(String((e && e.message) || e.type || 'error'));
+  });
+  window.addEventListener('unhandledrejection', function (e) {
+    errors.push(String((e && e.reason) || 'unhandled rejection'));
+  });
+  var nativeError = console.error;
+  console.error = function () {
+    errors.push(Array.prototype.map.call(arguments, String).join(' '));
+    nativeError.apply(console, arguments);
+  };
+})();
+</script>
+<div id="app">
+  <header id="topbar">
+    <h1>Chess Coach</h1>
+    <div id="last-move">The game has just started.</div>
+    <div id="game-controls"></div>
+  </header>
+  <main id="layout">
+    <section id="board-wrap">
+      <div id="board" aria-label="chess board"></div>
+    </section>
+    <aside id="panel"></aside>
+  </main>
+</div>
+<div id="smoke-errors" hidden></div>
+<script type="module">
+import { boot } from './app/main.js';
+boot();
+</script>
+</body>
+</html>

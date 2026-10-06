@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chess Coach</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-area" aria-label="Chess board">
+        <div class="top-bar">
+          <div>
+            <h1>Chess Coach</h1>
+            <p id="game-summary">Choose a level and make a move as White.</p>
+          </div>
+          <div class="controls" aria-label="Game controls">
+            <label for="level-select">Level</label>
+            <select id="level-select">
+              <option value="easy">Easy</option>
+              <option value="normal" selected>Normal</option>
+              <option value="hard">Hard</option>
+            </select>
+            <button id="new-game" type="button">New game</button>
+          </div>
+        </div>
+
+        <div id="board" class="board" role="grid" aria-label="Chess board"></div>
+      </section>
+
+      <aside class="side-panel" aria-label="Coach panel">
+        <section class="status-panel">
+          <h2>Position</h2>
+          <dl class="facts">
+            <div>
+              <dt>Turn</dt>
+              <dd id="turn-value">White</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd id="status-value">Ongoing</dd>
+            </div>
+            <div>
+              <dt>Last move</dt>
+              <dd id="last-move-value">None</dd>
+            </div>
+            <div>
+              <dt>Check</dt>
+              <dd id="check-value">No</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="coach-panel">
+          <h2>Coach</h2>
+          <p id="coach-verdict" class="verdict">Make your first move.</p>
+          <ul id="coach-reasons" class="reason-list"></ul>
+          <p id="coach-better" class="better-move"></p>
+        </section>
+
+        <section class="hint-panel">
+          <div class="panel-heading">
+            <h2>Hint</h2>
+            <button id="hint-button" type="button">Hint</button>
+          </div>
+          <p id="hint-value">Ask when it is your turn.</p>
+        </section>
+
+        <section class="moves-panel">
+          <h2>Moves</h2>
+          <ol id="move-list" class="move-list"></ol>
+        </section>
+
+        <section class="review-panel">
+          <h2>End review</h2>
+          <ol id="review-list" class="review-list"></ol>
+        </section>
+      </aside>
+    </main>
+
+    <script type="module" src="./app/app.js"></script>
+  </body>
+</html>

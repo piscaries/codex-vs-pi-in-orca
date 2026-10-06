@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Play a local game of chess and learn from each move.">
+    <title>Chess Coach</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">A quiet place to practice</p>
+          <h1>Chess Coach</h1>
+          <p class="intro">Play a real game. After each move, your coach explains what mattered.</p>
+        </div>
+        <div class="game-controls" aria-label="Game controls">
+          <label for="level">Challenge</label>
+          <select id="level">
+            <option value="beginner">Beginner</option>
+            <option value="club">Club player</option>
+            <option value="challenging">Challenging</option>
+          </select>
+          <button id="new-game" class="secondary" type="button">New game</button>
+        </div>
+      </header>
+
+      <section class="play-area" aria-label="Chess game">
+        <div class="board-column">
+          <div class="status-card" aria-live="polite">
+            <strong id="turn-indicator">Your turn</strong>
+            <span id="position-detail">Choose a piece to see where it can move.</span>
+          </div>
+          <div id="board" class="board" role="grid" aria-label="Chess board"></div>
+          <p id="result" class="result" aria-live="assertive"></p>
+        </div>
+
+        <aside class="coach-column" aria-label="Coach panel">
+          <section class="panel feedback-panel">
+            <p class="panel-label">Move feedback</p>
+            <div id="feedback" aria-live="polite">
+              <h2>Your coach is ready</h2>
+              <p>Move feedback will appear here.</p>
+            </div>
+          </section>
+
+          <section class="panel hint-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-label">Need a nudge?</p>
+                <h2>Hint</h2>
+              </div>
+              <button id="hint-button" type="button">Show hint</button>
+            </div>
+            <p id="hint" aria-live="polite">Hints suggest a move without playing it.</p>
+          </section>
+
+          <section id="recap-panel" class="panel recap-panel" hidden>
+            <p class="panel-label">Game review</p>
+            <h2>Your key moments</h2>
+            <div id="recap"></div>
+          </section>
+
+          <p id="error" class="error" role="alert" hidden></p>
+        </aside>
+      </section>
+    </main>
+
+    <dialog id="promotion-dialog" aria-labelledby="promotion-title">
+      <form method="dialog">
+        <h2 id="promotion-title">Choose a piece</h2>
+        <p>Your pawn reached the last rank. What should it become?</p>
+        <div class="promotion-options">
+          <button type="submit" value="q" data-promotion="q">Queen</button>
+          <button type="submit" value="r" data-promotion="r">Rook</button>
+          <button type="submit" value="b" data-promotion="b">Bishop</button>
+          <button type="submit" value="n" data-promotion="n">Knight</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="./app/main.js"></script>
+  </body>
+</html>

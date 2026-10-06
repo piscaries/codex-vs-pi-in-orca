@@ -1,0 +1,4 @@
+{"name":"Qd4?? (queen hangs to c5 pawn)","verdict":"blunder","reasons":["Your queen on d4 can now be captured for free by the pawn on c5.","A stronger move was moving your queen from d1 to d5."],"betterMove":"d1d5","ms":[502,500,499,498,500]}
+{"name":"Qxf7# (mate)","verdict":"best","reasons":["Checkmate — you win the game."],"betterMove":null,"ms":[501,500,500,500,500]}
+{"name":"1.g4","verdict":"inaccuracy","reasons":["A stronger move was moving your knight from b1 to c3."],"betterMove":"b1c3","ms":[501,501,501,500,500]}
+{"name":"2.Ba6 after 1.e4 e5","verdict":"blunder","reasons":["Your bishop on a6 can now be captured for free by the pawn on b7.","A stronger move was moving your knight from b1 to c3."],"betterMove":"b1c3","ms":[503,501,501,501,502]}
